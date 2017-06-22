@@ -7004,7 +7004,9 @@ case OP_MaxPgcnt: {            /* out2 */
 ** first time they are evaluated for this run.
 */
 case OP_Init: {          /* jump */
+#ifndef SQLITE_OMIT_TRACE
   char *zTrace;
+#endif
   int i;
 
   /* If the P4 argument is not NULL, then it must be an SQL comment string.
