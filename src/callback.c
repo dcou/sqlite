@@ -288,7 +288,7 @@ static FuncDef *functionSearch(
   const char *zFunc    /* Name of function */
 ){
   FuncDef *p;
-  for(p=sqlite3BuiltinFunctions.a[h]; p; p=p->u.pHash){
+  for(p=GLOBAL(FuncDefHash, sqlite3BuiltinFunctions).a[h]; p; p=p->u.pHash){
     if( sqlite3StrICmp(p->zName, zFunc)==0 ){
       return p;
     }
@@ -303,6 +303,8 @@ void sqlite3InsertBuiltinFuncs(
   FuncDef *aDef,      /* List of global functions to be inserted */
   int nDef            /* Length of the apDef[] list */
 ){
+  FuncDefHash *builtinFunctions = &GLOBAL(FuncDefHash, sqlite3BuiltinFunctions);
+
   int i;
   for(i=0; i<nDef; i++){
     FuncDef *pOther;
@@ -316,8 +318,8 @@ void sqlite3InsertBuiltinFuncs(
       pOther->pNext = &aDef[i];
     }else{
       aDef[i].pNext = 0;
-      aDef[i].u.pHash = sqlite3BuiltinFunctions.a[h];
-      sqlite3BuiltinFunctions.a[h] = &aDef[i];
+      aDef[i].u.pHash = builtinFunctions->a[h];
+      builtinFunctions->a[h] = &aDef[i];
     }
   }
 }

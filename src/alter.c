@@ -229,7 +229,7 @@ static void renameTriggerFunc(
 ** Register built-in functions used to help implement ALTER TABLE
 */
 void sqlite3AlterFunctions(void){
-  static FuncDef aAlterTableFuncs[] = {
+  static SQLITE_WSD FuncDef aAlterTableFuncs[] = {
     FUNCTION(sqlite_rename_table,   2, 0, 0, renameTableFunc),
 #ifndef SQLITE_OMIT_TRIGGER
     FUNCTION(sqlite_rename_trigger, 2, 0, 0, renameTriggerFunc),
@@ -238,7 +238,7 @@ void sqlite3AlterFunctions(void){
     FUNCTION(sqlite_rename_parent,  3, 0, 0, renameParentFunc),
 #endif
   };
-  sqlite3InsertBuiltinFuncs(aAlterTableFuncs, ArraySize(aAlterTableFuncs));
+  sqlite3InsertBuiltinFuncs(&GLOBAL(FuncDef, aAlterTableFuncs), ArraySize(aAlterTableFuncs));
 }
 
 /*

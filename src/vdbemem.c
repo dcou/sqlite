@@ -1444,10 +1444,10 @@ static void recordFunc(
 ** Register built-in functions used to help read ANALYZE data.
 */
 void sqlite3AnalyzeFunctions(void){
-  static FuncDef aAnalyzeTableFuncs[] = {
+  static SQLITE_WSD FuncDef aAnalyzeTableFuncs[] = {
     FUNCTION(sqlite_record,   1, 0, 0, recordFunc),
   };
-  sqlite3InsertBuiltinFuncs(aAnalyzeTableFuncs, ArraySize(aAnalyzeTableFuncs));
+  sqlite3InsertBuiltinFuncs(&GLOBAL(FuncDef, aAnalyzeTableFuncs), ArraySize(aAnalyzeTableFuncs));
 }
 
 /*

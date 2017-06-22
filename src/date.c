@@ -1229,7 +1229,7 @@ static void currentTimeFunc(
 ** external linkage.
 */
 void sqlite3RegisterDateTimeFunctions(void){
-  static FuncDef aDateTimeFuncs[] = {
+  static SQLITE_WSD FuncDef aDateTimeFuncs[] = {
 #ifndef SQLITE_OMIT_DATETIME_FUNCS
     DFUNCTION(julianday,        -1, 0, 0, juliandayFunc ),
     DFUNCTION(date,             -1, 0, 0, dateFunc      ),
@@ -1245,5 +1245,5 @@ void sqlite3RegisterDateTimeFunctions(void){
     STR_FUNCTION(current_timestamp, 0, "%Y-%m-%d %H:%M:%S", 0, currentTimeFunc),
 #endif
   };
-  sqlite3InsertBuiltinFuncs(aDateTimeFuncs, ArraySize(aDateTimeFuncs));
+  sqlite3InsertBuiltinFuncs(&GLOBAL(FuncDef, aDateTimeFuncs), ArraySize(aDateTimeFuncs));
 }

@@ -1755,7 +1755,7 @@ void sqlite3RegisterBuiltinFunctions(void){
   **
   ** For peak efficiency, put the most frequently used function last.
   */
-  static FuncDef aBuiltinFunc[] = {
+  static SQLITE_WSD FuncDef aBuiltinFunc[] = {
 #ifdef SQLITE_SOUNDEX
     FUNCTION(soundex,            1, 0, 0, soundexFunc      ),
 #endif
@@ -1850,7 +1850,7 @@ void sqlite3RegisterBuiltinFunctions(void){
   sqlite3AnalyzeFunctions();
 #endif
   sqlite3RegisterDateTimeFunctions();
-  sqlite3InsertBuiltinFuncs(aBuiltinFunc, ArraySize(aBuiltinFunc));
+  sqlite3InsertBuiltinFuncs(&GLOBAL(FuncDef, aBuiltinFunc), ArraySize(aBuiltinFunc));
 
 #if 0  /* Enable to print out how the built-in functions are hashed */
   {
@@ -1858,7 +1858,7 @@ void sqlite3RegisterBuiltinFunctions(void){
     FuncDef *p;
     for(i=0; i<SQLITE_FUNC_HASH_SZ; i++){
       printf("FUNC-HASH %02d:", i);
-      for(p=sqlite3BuiltinFunctions.a[i]; p; p=p->u.pHash){
+      for(p=GLOBAL(FuncDefHash, sqlite3BuiltinFunctions).a[i]; p; p=p->u.pHash){
         int n = sqlite3Strlen30(p->zName);
         int h = p->zName[0] + n;
         printf(" %s(%d)", p->zName, h);

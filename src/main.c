@@ -225,7 +225,7 @@ int sqlite3_initialize(void){
       sqlite3_init_sqllog();
     }
 #endif
-    memset(&sqlite3BuiltinFunctions, 0, sizeof(sqlite3BuiltinFunctions));
+    memset(&GLOBAL(FuncDefHash, sqlite3BuiltinFunctions), 0, sizeof(sqlite3BuiltinFunctions));
     sqlite3RegisterBuiltinFunctions();
     if( sqlite3GlobalConfig.isPCacheInit==0 ){
       rc = sqlite3PcacheInitialize();

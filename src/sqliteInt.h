@@ -4009,7 +4009,7 @@ extern const unsigned char sqlite3UpperToLower[];
 extern const unsigned char sqlite3CtypeMap[];
 extern const Token sqlite3IntTokens[];
 extern SQLITE_WSD struct Sqlite3Config sqlite3Config;
-extern FuncDefHash sqlite3BuiltinFunctions;
+extern SQLITE_WSD FuncDefHash sqlite3BuiltinFunctions;
 #ifndef SQLITE_OMIT_WSD
 extern int sqlite3PendingByte;
 #endif
