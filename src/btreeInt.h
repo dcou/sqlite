@@ -213,6 +213,9 @@
 **      4     Number of leaf pointers on this page
 **      *     zero or more pages numbers of leaves
 */
+#ifndef BTREEINT_H
+#define BTREEINT_H
+
 #include "sqliteInt.h"
 
 
@@ -699,3 +702,5 @@ struct IntegrityCk {
 #else
 # define get2byteAligned(x)  ((x)[0]<<8 | (x)[1])
 #endif
+
+#endif /* BTREEINT_H */
